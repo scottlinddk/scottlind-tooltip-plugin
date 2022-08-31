@@ -15,21 +15,12 @@ class Tooltip {
         add_settings_section('tt_tooltip_section', null, null, 'scottlind-tooltip-settings');
         
         add_settings_field('tt_text', __('Tekst ved højreklik:'), [$this, 'setting_text'], 'scottlind-tooltip-settings', 'tt_tooltip_section');
-        register_setting('tooltip-plugin', 'tt_text', ['sanitize_callback' => 'sanitize_text_field', 'default' => __('Vi har prismatch.')]);
-
-        add_settings_field('tt_location', __('Hvor skal tekst vises ift. højreklik?'), [$this, 'setting_location'], 'scottlind-tooltip-settings', 'tt_tooltip_section');
-        register_setting('tooltip-plugin', 'tt_location', ['sanitize_callback' => [$this, 'sanitize_location'], 'default' => __('Top')]);
+        register_setting('tooltip-plugin', 'tt_text', ['sanitize_callback' => 'sanitize_text_field', 'default' => __('Tooltip text.')]);
     }
 
     function setting_text() {
         ob_start();
             include(__DIR__."/admin_settings/setting_text.php");
-        ob_end_flush(); 
-    }
-
-    function setting_location() {
-        ob_start();
-            include(__DIR__."/admin_settings/setting_location.php");
         ob_end_flush(); 
     }
 
